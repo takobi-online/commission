@@ -6,7 +6,8 @@ class AccountInvoiceLineAgent(models.Model):
 
     @api.depends(
         "agent_line", "agent_line.settlement.state", "invoice", "invoice.state",
-        "object_id.sale_line_ids.agents.agent"
+        "object_id.sale_line_ids.agents.agent",
+        "object_id.sale_line_ids.agents.agent_line.settlement.state",
     )
     def _compute_settled(self):
         for line in self:
